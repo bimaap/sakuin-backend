@@ -7,7 +7,7 @@ global.__basepath = __dirname
 
 app.use(
     cors({
-        origin: ["http://localhost:8000", "http://localhost:8080"],
+        origin: [`http://localhost:${port}`, "http://localhost:8080"],
         methods: ["POST", "PUT", "GET", "OPTIONS", "HEAD", "DELETE", "PATCH"],
         credentials: true
     })
