@@ -19,3 +19,14 @@ model users {
   phone_number   String? @default(dbgenerated("0")) @db.VarChar
   account_number String? @unique(map: "users_un_acc_num") @default(dbgenerated("0")) @db.VarChar
 }
+
+model transactions {
+  id          Int     @id(map: "transactions_pk") @default(autoincrement())
+  sender_id   String  @db.VarChar
+  receiver_id String  @db.VarChar
+  status      String? @db.VarChar
+  amount      String? @db.VarChar
+  notes       String? @db.VarChar
+  type        String? @db.VarChar
+  date        String? @db.VarChar
+}

@@ -3,10 +3,10 @@ const response = require('../helpers/standardResponse')
 const usersModel = require('../models/users')
 
 exports.getUsersData = (req, res) => {
-    usersModel.getUsersData(req, (err, msg, results) => {
+    usersModel.getUsersData(req, (err, msg, results, pageInfo) => {
         if(err) return response(res, err, null, null, 400);
         
-        return response(res, msg, results);
+        return response(res, msg, results, pageInfo);
     })
 }
 

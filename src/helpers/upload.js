@@ -30,10 +30,10 @@ const upload = multer({
         fileSize: Number(process.env.LIMIT_FILE_SIZE) * 1000 * 1000
     },
     fileFilter: (req, file, cb) => {
-        if (!type_file.includes(file.mimetype)) {
-            return cb(new Error('File is not allowed'))
-        }
-        cb(null, true)
+      if (!type_file.includes(file.mimetype)) {
+          return cb(new Error('File is not allowed'))
+      }
+      cb(null, true)
     }
 })
 

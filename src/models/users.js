@@ -1,18 +1,45 @@
 
 const { prisma } = require("../../prisma/constants/config");
-const upload = require('../middleware/upload')
 const bcrypt = require("bcrypt");
 
 exports.getUsersData = async (req, cb) => {
-    let users;
+    let users, usersAll;
+    
     try {
-        users = await prisma.users.findMany()
+        usersAll = await prisma.users.findMany()
+
+        let limit = parseInt(req.query.limit)? parseInt(req.query.limit):10
+        let page = parseInt(req.query.page)? parseInt(req.query.page):1 
+        let search = req.query.search
+
+        users = await prisma.users.findMany({
+            skip: page == 1? 0: search? usersAll.length : ((page-1)*limit),
+            take: search? usersAll.length:limit,
+            where: {
+                email: {
+                    contains: search? search:'',
+                },
+            },
+            orderBy: {
+                id: 'asc',
+            },
+        })
+        
         if(!users){
             return cb('Users not found')
         }
         
+        const pageInfo = {}
+
+        pageInfo.totalData = search? users.length:usersAll.length
+        pageInfo.totalPage = search? 1:Math.ceil(usersAll.length/limit)
+        pageInfo.currentPage = page
+        pageInfo.nextPage = search? null : page == Math.ceil(usersAll.length/limit)? null : (page+1)
+        pageInfo.prevPage = page == 1? null : (page-1)
+
         users.map((e, index) => {
             users[index] = {
+                id: e.id,
                 email: e.email,
                 first_name: e.first_name,
                 last_name: e.last_name,
@@ -24,7 +51,7 @@ exports.getUsersData = async (req, cb) => {
             }
         })
 
-        return cb(null, 'All users data', users)
+        return cb(null, 'All users data', users, pageInfo)
     } catch (error) {
         return cb(error.message)
     }
