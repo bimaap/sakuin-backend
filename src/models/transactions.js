@@ -18,9 +18,18 @@ exports.getTransactions = async (req, cb) => {
             skip: page == 1? 0: ((page-1)*limit),
             take: limit,
             where: {
-                sender_id: {
-                    contains: req.authResult.id,
-                },
+                OR: [
+                    { sender_id: { contains: req.authResult.id }},
+                    { receiver_id: { contains: req.authResult.id }},
+                ]
+                // sender_id: {
+                //     contains: req.authResult.id,
+                // },
+                // AND: {
+                //     receiver_id: {
+                //         contains: req.authResult.id,
+                //     }
+                // }
             },
             orderBy: {
                 id: 'asc',
@@ -78,6 +87,15 @@ exports.postTransfer = async (req, cb) => {
             },
             data: {
               balance: parseInt(user.balance) - parseInt(req.body.amount)
+            },
+        })
+
+        await prisma.users.update({
+            where: {
+              id: req.params.id
+            },
+            data: {
+              balance: parseInt(receiver.balance) - parseInt(req.body.amount)
             },
         })
 
