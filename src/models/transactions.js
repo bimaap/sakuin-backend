@@ -70,6 +70,7 @@ exports.postTransfer = async (req, cb) => {
         if(parseInt(user.balance) < parseInt(req.body.amount)) return cb('Not enough money')
 
         transfer = await prisma.transactions.create({
+            localeFlag: { connect: { id: 1 } },
             data: {
                 sender_id: req.authResult.id,
                 receiver_id: req.params.id,
