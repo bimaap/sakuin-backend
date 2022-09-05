@@ -21,12 +21,16 @@ model users {
 }
 
 model transactions {
-  id          Int     @id(map: "transactions_pk") @default(autoincrement())
-  sender_id   String  @db.VarChar
-  receiver_id String  @db.VarChar
-  status      String? @db.VarChar
-  amount      String? @db.VarChar
-  notes       String? @db.VarChar
-  type        String? @db.VarChar
-  date        String? @db.VarChar
+  id             Int     @id(map: "transactions_pk") @default(autoincrement())
+  sender_id      String  @db.VarChar
+  receiver_id    String  @db.VarChar
+  status         String? @db.VarChar
+  amount         String? @db.VarChar
+  notes          String? @db.VarChar
+  type           String? @db.VarChar
+  date           String? @db.VarChar
+  sender_name    String? @db.VarChar
+  sender_image   String? @db.VarChar
+  receiver_name  String? @db.VarChar
+  receiver_image String? @db.VarChar
 }
