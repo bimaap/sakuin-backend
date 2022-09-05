@@ -95,7 +95,7 @@ exports.postTransfer = async (req, cb) => {
               id: req.params.id
             },
             data: {
-              balance: parseInt(receiver.balance) - parseInt(req.body.amount)
+              balance: parseInt(receiver.balance) + parseInt(req.body.amount)
             },
         })
 
