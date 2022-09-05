@@ -1,29 +1,62 @@
 const { prisma } = require("../../prisma/constants/config");
 
 exports.getTransactions = async (req, cb) => {
-    let transactions;
+    let transactions, allTransactions;
     try {
-        transactions = await prisma.transactions.findMany({
+        let limit = parseInt(req.query.limit)? parseInt(req.query.limit):6
+        let page = parseInt(req.query.page)? parseInt(req.query.page):1
+
+        allTransactions = await prisma.transactions.findMany({
             where: {
                 sender_id: {
                     contains: req.authResult.id,
                 },
             },
         });
-        return cb(null, 'All transactions data', transactions)
+
+        transactions = await prisma.transactions.findMany({
+            skip: page == 1? 0: ((page-1)*limit),
+            take: limit,
+            where: {
+                sender_id: {
+                    contains: req.authResult.id,
+                },
+            },
+            orderBy: {
+                id: 'asc',
+            },
+        })
+
+        const pageInfo = {}
+
+        pageInfo.totalData = allTransactions.length
+        pageInfo.totalPage = Math.ceil(allTransactions.length/limit)
+        pageInfo.currentPage = page
+        pageInfo.nextPage = page == Math.ceil(allTransactions.length/limit)? null : (page+1)
+        pageInfo.prevPage = page == 1? null : (page-1)
+
+        return cb(null, 'All transactions data', transactions, pageInfo)
     } catch (error) {
         return cb(error.message)
     }
 }
 
 exports.postTransfer = async (req, cb) => {
-    let transfer, user;
+    let transfer, user, receiver;
     try {
         user = await prisma.users.findUnique({
             where:{
                 id: req.authResult.id
             }
         });
+
+        receiver = await prisma.users.findUnique({
+            where:{
+                id: req.params.id
+            }
+        });
+
+        if(!receiver) return cb('Receiver not found')
 
         if(parseInt(user.balance) < parseInt(req.body.amount)) return cb('Not enough money')
 
