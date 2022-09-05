@@ -78,10 +78,10 @@ exports.postTransfer = async (req, cb) => {
                 notes: req.body.notes,
                 type: 'Transfer',
                 date: String(Date.now()),
-                // sender_name: `${user.first_name} ${user.last_name}`,
-                // sender_image: user.image,
-                // receiver_name: `${receiver.first_name} ${receiver.last_name}`,
-                // receiver_image: receiver.image
+                sender_name: `${user.first_name} ${user.last_name}`,
+                sender_image: user.image,
+                receiver_name: `${receiver.first_name} ${receiver.last_name}`,
+                receiver_image: receiver.image
             }
         });
 
