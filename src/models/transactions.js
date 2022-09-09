@@ -47,7 +47,7 @@ exports.getTransactionById = async (req, cb) => {
     try {
         transaction = await prisma.transactions.findUnique({
             where:{
-                id: req.params.id
+                id: parseInt(req.params.id)
             }
         });
         
