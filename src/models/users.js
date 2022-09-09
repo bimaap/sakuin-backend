@@ -11,6 +11,7 @@ exports.getUsersData = async (req, cb) => {
         let limit = parseInt(req.query.limit)? parseInt(req.query.limit):10
         let page = parseInt(req.query.page)? parseInt(req.query.page):1 
         let search = req.query.search
+        let filter = req.query.filter
 
         users = await prisma.users.findMany({
             skip: page == 1? 0: search? usersAll.length : ((page-1)*limit),
@@ -21,7 +22,7 @@ exports.getUsersData = async (req, cb) => {
                 },
             },
             orderBy: {
-                id: 'asc',
+                id: req.query.filter? req.query.filter:'asc',
             },
         })
         
