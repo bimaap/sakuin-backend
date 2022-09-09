@@ -22,14 +22,6 @@ exports.getTransactions = async (req, cb) => {
                     { sender_id: { contains: req.authResult.id }},
                     { receiver_id: { contains: req.authResult.id }},
                 ]
-                // sender_id: {
-                //     contains: req.authResult.id,
-                // },
-                // AND: {
-                //     receiver_id: {
-                //         contains: req.authResult.id,
-                //     }
-                // }
             },
             orderBy: {
                 id: 'asc',
@@ -45,6 +37,25 @@ exports.getTransactions = async (req, cb) => {
         pageInfo.prevPage = page == 1? null : (page-1)
 
         return cb(null, 'All transactions data', transactions, pageInfo)
+    } catch (error) {
+        return cb(error.message)
+    }
+}
+
+exports.getTransactionById = async (req, cb) => {
+    let transaction;
+    try {
+        transaction = await prisma.transactions.findUnique({
+            where:{
+                id: req.params.id
+            }
+        });
+        
+        if(!transaction){
+            return cb('Transaction not found')
+        }
+
+        return cb(null, 'Transaction data', transaction)
     } catch (error) {
         return cb(error.message)
     }
