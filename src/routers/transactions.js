@@ -4,7 +4,7 @@ const transactionsControllers = require("../controllers/transactions");
 const auth = require('../middleware/auth')
 
 transactions.get('/', auth, transactionsControllers.getTransactions)
-transactions.get('/:id', auth, transactionsControllers.getTransactionById)
+transactions.get('/transaction/:id', auth, transactionsControllers.getTransactionById)
 transactions.post('/transfer/:id', auth, transactionsControllers.postTransfer)
 transactions.post('/topup', auth, transactionsControllers.postTopup)
 
