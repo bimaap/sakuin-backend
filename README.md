@@ -20,7 +20,7 @@ A backend program for Sakuin E-wallet
 4. Install required package with command `npm i`
 5. Run the app with `npm run dev`
 
-## Main EndPoint (auth and authenticated)
+## Main Endpoint
 
 | url        | Method           | Description  |
 | ------------- |:-------------:| -----:|
