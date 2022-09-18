@@ -5,13 +5,14 @@ const app = express();
 const port = process.env.PORT || 8000;
 global.__basepath = __dirname
 
-app.use(
-    cors({
-        origin: [`http://localhost:${port}`, "http://localhost:8080"],
-        methods: ["POST", "PUT", "GET", "OPTIONS", "HEAD", "DELETE", "PATCH"],
-        credentials: true
-    })
-)
+app.use(cors())
+// app.use(
+//     cors({
+//         origin: [`http://localhost:${port}`, "http://localhost:8080"],
+//         methods: ["POST", "PUT", "GET", "OPTIONS", "HEAD", "DELETE", "PATCH"],
+//         credentials: true
+//     })
+// )
 
 app.unsubscribe(express.json());
 app.use(express.urlencoded({ extended: true }));
