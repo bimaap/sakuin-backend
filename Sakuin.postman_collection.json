@@ -1,0 +1,486 @@
+{
+	"info": {
+		"_postman_id": "7fef1d53-f750-43ad-8c1e-a112366e49fa",
+		"name": "Sakuin",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Auth",
+			"item": [
+				{
+					"name": "Login",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "email",
+									"value": "bimaap@gmail.com",
+									"type": "default"
+								},
+								{
+									"key": "password",
+									"value": "bimaap1234",
+									"type": "default"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{sakuin_url}}/auth/login",
+							"host": [
+								"{{sakuin_url}}"
+							],
+							"path": [
+								"auth",
+								"login"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Register",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "email",
+									"value": "rend@gmail.com",
+									"type": "default"
+								},
+								{
+									"key": "password",
+									"value": "rend1234",
+									"type": "default"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{sakuin_url}}/auth/register",
+							"host": [
+								"{{sakuin_url}}"
+							],
+							"path": [
+								"auth",
+								"register"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "User",
+			"item": [
+				{
+					"name": "Get User",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": []
+						},
+						"url": {
+							"raw": "{{sakuin_url}}/users?page=&limit=&search=admin",
+							"host": [
+								"{{sakuin_url}}"
+							],
+							"path": [
+								"users"
+							],
+							"query": [
+								{
+									"key": "page",
+									"value": ""
+								},
+								{
+									"key": "limit",
+									"value": ""
+								},
+								{
+									"key": "search",
+									"value": "admin"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get User by Id",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": []
+						},
+						"url": {
+							"raw": "{{sakuin_url}}/users/:id",
+							"host": [
+								"{{sakuin_url}}"
+							],
+							"path": [
+								"users",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "",
+									"description": "f6lcqnaftyv39t8r1vljbv74cwsfxwpzpodbdzwi"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get User Pin",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{sakuin_url}}/users/check/pin",
+							"host": [
+								"{{sakuin_url}}"
+							],
+							"path": [
+								"users",
+								"check",
+								"pin"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Patch User Full Name",
+					"request": {
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "first_name",
+									"value": "ssss",
+									"type": "default"
+								},
+								{
+									"key": "last_name",
+									"value": "asssas",
+									"type": "default"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{sakuin_url}}/users/patch/name",
+							"host": [
+								"{{sakuin_url}}"
+							],
+							"path": [
+								"users",
+								"patch",
+								"name"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Patch User Phone Number",
+					"request": {
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "phone_number",
+									"value": "08111111111",
+									"type": "default"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{sakuin_url}}/users/patch/phone",
+							"host": [
+								"{{sakuin_url}}"
+							],
+							"path": [
+								"users",
+								"patch",
+								"phone"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Patch User Image",
+					"request": {
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "image",
+									"type": "file",
+									"src": "/C:/Users/nvyet/Desktop/Fazztrack/Pics/dino-p.png"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{sakuin_url}}/users/patch/image",
+							"host": [
+								"{{sakuin_url}}"
+							],
+							"path": [
+								"users",
+								"patch",
+								"image"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Patch User Pin",
+					"request": {
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "pin",
+									"value": "",
+									"type": "default"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{sakuin_url}}/users/patch/pin",
+							"host": [
+								"{{sakuin_url}}"
+							],
+							"path": [
+								"users",
+								"patch",
+								"pin"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Patch User Password",
+					"request": {
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "password",
+									"value": "admin12345",
+									"type": "default"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{sakuin_url}}/users/patch/password",
+							"host": [
+								"{{sakuin_url}}"
+							],
+							"path": [
+								"users",
+								"patch",
+								"password"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Transactions",
+			"item": [
+				{
+					"name": "Get Transactions",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": []
+						},
+						"url": {
+							"raw": "{{sakuin_url}}/transactions/?page=1&limit=",
+							"host": [
+								"{{sakuin_url}}"
+							],
+							"path": [
+								"transactions",
+								""
+							],
+							"query": [
+								{
+									"key": "page",
+									"value": "1"
+								},
+								{
+									"key": "limit",
+									"value": ""
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Transaction By Id",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{sakuin_url}}/transactions/:id",
+							"host": [
+								"{{sakuin_url}}"
+							],
+							"path": [
+								"transactions",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "1"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Post Transfer",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "amount",
+									"value": "2000",
+									"type": "default"
+								},
+								{
+									"key": "notes",
+									"value": "Beli roti",
+									"type": "default"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{sakuin_url}}/transactions/transfer/:id",
+							"host": [
+								"{{sakuin_url}}"
+							],
+							"path": [
+								"transactions",
+								"transfer",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "1"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Post Topup",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "amount",
+									"value": "7500",
+									"type": "default"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{sakuin_url}}/transactions/topup",
+							"host": [
+								"{{sakuin_url}}"
+							],
+							"path": [
+								"transactions",
+								"topup"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	],
+	"auth": {
+		"type": "bearer",
+		"bearer": [
+			{
+				"key": "token",
+				"value": "{{sakuin_token}}",
+				"type": "string"
+			}
+		]
+	},
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	]
+}
